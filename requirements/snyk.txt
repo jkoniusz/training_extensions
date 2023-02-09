@@ -1,0 +1,44 @@
+anomalib==0.3.6
+nncf==2.2.0
+onnx==1.10.1
+openmodelzoo-modelapi @ git+https://github.com/openvinotoolkit/open_model_zoo/@releases/2022/SCv1.1#egg=openmodelzoo-modelapi&subdirectory=demos/common/python
+openvino==2022.1.0
+openvino-dev==2022.1.0
+pytorch-lightning>=1.6.0,<1.7.0
+openvino==2022.1.0
+openvino-dev==2022.1.0
+openmodelzoo-modelapi @ git+https://github.com/openvinotoolkit/open_model_zoo/@releases/2022/SCv1.1#egg=openmodelzoo-modelapi&subdirectory=demos/common/python
+nncf@ git+https://github.com/openvinotoolkit/nncf@e85a695da95b202b4579ea11f880f1b14bfcda2e#egg=nncf
+networkx<=2.8.0
+openvino==2022.1.0
+openvino-dev==2022.1.0
+openmodelzoo-modelapi @ git+https://github.com/openvinotoolkit/open_model_zoo/@releases/2022/SCv1.1#egg=openmodelzoo-modelapi&subdirectory=demos/common/python
+nncf@ git+https://github.com/openvinotoolkit/nncf@e85a695da95b202b4579ea11f880f1b14bfcda2e#egg=nncf
+networkx<=2.8.0
+protobuf<3.21.0
+openvino==2022.1.0
+openvino-dev==2022.1.0
+openmodelzoo-modelapi @ git+https://github.com/openvinotoolkit/open_model_zoo/@releases/2022/SCv1.1#egg=openmodelzoo-modelapi&subdirectory=demos/common/python
+nncf@ git+https://github.com/openvinotoolkit/nncf@e85a695da95b202b4579ea11f880f1b14bfcda2e#egg=nncf
+networkx<=2.8.0
+protobuf<3.21.0
+pyyaml
+opencv-python
+numpy
+nbmake
+pytest
+pytest-ordering
+hpopt@git+https://github.com/openvinotoolkit/hyper_parameter_optimization@develop
+pylint==2.7.3
+pytest==6.2.*
+openmodelzoo-modelapi @ git+https://github.com/openvinotoolkit/open_model_zoo/@releases/2022/SCv1.1#egg=openmodelzoo-modelapi&subdirectory=demos/common/python
+openvino==2022.1.0
+numpy>=1.16.4
+scikit-learn==0.24.*
+Shapely>=1.7.1,<=1.8.0
+networkx>=2.5,<2.8.1rc1
+opencv-python==4.5.*
+pymongo==3.12.0
+omegaconf==2.1.*
+natsort>=6.0.0
+attrs>=21.2.0
