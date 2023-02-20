@@ -209,16 +209,16 @@ class ClassificationInferenceTask(
         outputs = results.get("outputs")
         logger.debug(f"results of run_task = {outputs}")
         if outputs is None:
-            logger.error(f"error while exporting model, result is None: {results.get('msg')}")
-        else:
-            bin_file = outputs.get("bin")
-            xml_file = outputs.get("xml")
-            if xml_file is None or bin_file is None:
-                raise RuntimeError("invalid status of exporting. bin and xml should not be None")
-            with open(bin_file, "rb") as f:
-                output_model.set_data("openvino.bin", f.read())
-            with open(xml_file, "rb") as f:
-                output_model.set_data("openvino.xml", f.read())
+            raise RuntimeError(results.get("msg"))
+
+        bin_file = outputs.get("bin")
+        xml_file = outputs.get("xml")
+        if xml_file is None or bin_file is None:
+            raise RuntimeError("invalid status of exporting. bin and xml should not be None")
+        with open(bin_file, "rb") as f:
+            output_model.set_data("openvino.bin", f.read())
+        with open(xml_file, "rb") as f:
+            output_model.set_data("openvino.xml", f.read())
         output_model.precision = [ModelPrecision.FP32]
         output_model.set_data(
             "label_schema.json",
@@ -399,13 +399,13 @@ class ClassificationInferenceTask(
         # During semi-implementation, this line should be fixed to -> self._recipe_cfg.train_type = train_type
         self._recipe_cfg.train_type = self._train_type.name
 
-        options_for_patch_datasets = {"type": "MPAClsDataset", "empty_label": self._empty_label}
+        options_for_patch_datasets = {"type": "OTXClsDataset", "empty_label": self._empty_label}
         options_for_patch_evaluation = {"task": "normal"}
         if self._multilabel:
-            options_for_patch_datasets["type"] = "MPAMultilabelClsDataset"
+            options_for_patch_datasets["type"] = "OTXMultilabelClsDataset"
             options_for_patch_evaluation["task"] = "multilabel"
         elif self._hierarchical:
-            options_for_patch_datasets["type"] = "MPAHierarchicalClsDataset"
+            options_for_patch_datasets["type"] = "OTXHierarchicalClsDataset"
             options_for_patch_datasets["hierarchical_info"] = self._hierarchical_info
             options_for_patch_evaluation["task"] = "hierarchical"
         elif self._selfsl:

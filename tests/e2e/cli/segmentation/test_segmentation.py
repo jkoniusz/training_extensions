@@ -10,7 +10,8 @@ import torch
 
 from otx.api.entities.model_template import parse_model_template
 from otx.cli.registry import Registry
-from otx.cli.utils.tests import (
+from tests.test_suite.e2e_test_system import e2e_pytest_component
+from tests.test_suite.run_test_command import (
     get_template_dir,
     nncf_eval_openvino_testing,
     nncf_eval_testing,
@@ -32,7 +33,6 @@ from otx.cli.utils.tests import (
     pot_optimize_testing,
     pot_validate_fq_testing,
 )
-from tests.test_suite.e2e_test_system import e2e_pytest_component
 
 # TODO: Currently, it is closed to sample test. need to change other sample
 args = {
@@ -307,16 +307,17 @@ class TestToolsMPASelfSLSegmentation:
     @e2e_pytest_component
     @pytest.mark.parametrize("template", templates, ids=templates_ids)
     def test_otx_train(self, template, tmp_dir_path):
-        tmp_dir_path = tmp_dir_path / "segmentation/test_selfsl"
-        otx_train_testing(template, tmp_dir_path, otx_dir, args_selfsl)
-        template_work_dir = get_template_dir(template, tmp_dir_path)
+        tmp_dir_path_1 = tmp_dir_path / "segmentation/test_selfsl"
+        otx_train_testing(template, tmp_dir_path_1, otx_dir, args_selfsl)
+        template_work_dir = get_template_dir(template, tmp_dir_path_1)
         args1 = copy.deepcopy(args)
         args1["--load-weights"] = f"{template_work_dir}/trained_{template.model_template_id}/weights.pth"
-        otx_train_testing(template, tmp_dir_path, otx_dir, args1)
+        tmp_dir_path_2 = tmp_dir_path / "segmentation/test_selfsl_sl"
+        otx_train_testing(template, tmp_dir_path_2, otx_dir, args1)
 
     @e2e_pytest_component
     @pytest.mark.skipif(TT_STABILITY_TESTS, reason="This is TT_STABILITY_TESTS")
     @pytest.mark.parametrize("template", templates, ids=templates_ids)
     def test_otx_eval(self, template, tmp_dir_path):
-        tmp_dir_path = tmp_dir_path / "segmentation/test_selfsl"
+        tmp_dir_path = tmp_dir_path / "segmentation/test_selfsl_sl"
         otx_eval_testing(template, tmp_dir_path, otx_dir, args)
